@@ -43,7 +43,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Bean
 	JwtEncoder jwtEncoder() {
-		JWK jwk = new RSAKey.Builder(rsaKeys.publicKey()).privateKey(rsaKeys.privateKey()).build();
+		JWK jwk = new RSAKey
+			.Builder(rsaKeys.publicKey())
+			.privateKey(rsaKeys.privateKey())
+			.build();
 		JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
 			return new NimbusJwtEncoder(jwkSource);
 	}
@@ -55,22 +58,28 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-	  return authConfig.getAuthenticationManager();
+		return authConfig.getAuthenticationManager();
 	}
 
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable())
-			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/**").permitAll()
-			)				
-			.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-			.exceptionHandling((exceptions) -> exceptions
-					.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
-					.accessDeniedHandler(new BearerTokenAccessDeniedHandler())
-			)
-			.logout((logout) -> logout.permitAll());
-			
+
+		http.csrf(csrf -> csrf.disable());
+
+		http.sessionManagement((session) -> session
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+		
+		http.exceptionHandling((exceptions) -> exceptions
+			.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint())
+			.accessDeniedHandler(new BearerTokenAccessDeniedHandler()));
+
+		http.authorizeHttpRequests((requests) -> requests
+			.requestMatchers("/**")
+			.permitAll());
+		
+		http.logout((logout) -> logout
+			.permitAll());
+
 		return http.build();
 	}
 
