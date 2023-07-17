@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/signup
+Content-Type: application/json
+
+{
+    "username":"anton2",
+    "password":"password",
+    "email":"anton2@test.com",
+    "role":"admin",
+    "enabled": true
+}
