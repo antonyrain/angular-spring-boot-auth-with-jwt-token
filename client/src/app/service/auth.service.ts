@@ -17,4 +17,9 @@ export class AuthService {
     return this.http
     .post<any>(`${this.api_url}/login`, data)
   }
+
+  submitSignup(data: any): Observable<any> {
+    return this.http
+    .post<any>(`${this.api_url}/signup`, data)
+  }
 }

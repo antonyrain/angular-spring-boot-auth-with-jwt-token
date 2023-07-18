@@ -3,7 +3,6 @@ package com.antonyrain.server.api;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +42,7 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @Autowired
-	JwtEncoder jwtEncoder;
+    JwtEncoder jwtEncoder;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -92,8 +91,6 @@ public class AuthController {
 
             String access_token = this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
-            System.out.println(access_token);
-
             return ResponseEntity.ok()
                 .header(HttpHeaders.AUTHORIZATION, access_token)
                 .body(userDetails);
@@ -122,7 +119,7 @@ public class AuthController {
             signupRequest.getUsername(),
             passwordEncoder.encode(signupRequest.getPassword()),
             signupRequest.getEmail(),
-            signupRequest.isEnabled()
+            true
         );
 
         String strRoles = signupRequest.getRole();

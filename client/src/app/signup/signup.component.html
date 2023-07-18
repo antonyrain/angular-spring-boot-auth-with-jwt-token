@@ -1,0 +1,24 @@
+<section class="container">
+    <h2 class="section-heading">Signup</h2>
+    <form [formGroup]="signupForm" (submit)="submitSignup()" class="form">
+      <label for="username">Username:</label>
+      <input id="username" type="text" formControlName="username">
+
+      <label for="password">Password:</label>
+      <input id="password" type="text" formControlName="password">
+
+      <label for="email">Email:</label>
+      <input id="email" type="text" formControlName="email">
+
+      <div class="check-box">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let item of checklist">
+                <input type="checkbox" formControlName="role" value="{{item.id}}" [checked]="item.isSelected"
+                    (change)="isAllSelected(item)"/>
+                      {{item.value}}</li>
+        </ul>
+    </div>
+
+      <button type="submit" class="primary">Signup</button>
+    </form>
+  </section>

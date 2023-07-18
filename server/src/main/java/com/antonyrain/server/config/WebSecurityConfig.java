@@ -33,6 +33,7 @@ import com.nimbusds.jose.proc.SecurityContext;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig implements WebMvcConfigurer {
+
 	private final RsaProperties rsaKeys;
 	
 	public WebSecurityConfig(RsaProperties rsaKeys) {
@@ -40,8 +41,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	}
 
 	@ConfigurationProperties(prefix ="rsa")
-	public record RsaProperties(RSAPrivateKey privateKey, RSAPublicKey publicKey) {
-	}
+	public record RsaProperties(
+		RSAPrivateKey privateKey, 
+		RSAPublicKey publicKey
+	) {}
 
 	@Bean
 	JwtEncoder jwtEncoder() {
@@ -61,14 +64,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	@Bean
   	public PasswordEncoder passwordEncoder() {
     	return new BCryptPasswordEncoder();
-  }
+	}
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
 		return authConfig.getAuthenticationManager();
 	}
-
-    @Bean
+	
+	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
 		http.csrf(csrf -> csrf.disable());
@@ -89,7 +92,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		return http.build();
 	}
-
+	
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")

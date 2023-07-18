@@ -1,12 +1,12 @@
-<section class="listing-apply">
-    <h2 class="section-heading">Login here:</h2>
-    <form [formGroup]="loginForm" (submit)="submitLogin()">
-      <label for="username">Username</label>
+<section class="container">
+    <h2 class="section-heading">Login</h2>
+    <form [formGroup]="loginForm" (submit)="submitLogin()" class="form">
+      <label for="username">Username:</label>
       <input id="username" type="text" formControlName="username">
 
-      <label for="password">Password</label>
+      <label for="password">Password:</label>
       <input id="password" type="text" formControlName="password">
 
-      <button type="submit" class="primary">Login now</button>
+      <button type="submit" class="primary">Login</button>
     </form>
   </section>

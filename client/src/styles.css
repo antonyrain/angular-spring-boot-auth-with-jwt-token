@@ -1,1 +1,70 @@
 /* You can add global styles to this file, and also import other style files */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+body {
+  font-family: Helvetica, sans-serif;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.nav-bar {
+    width: auto;
+    height: 50px;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+}
+
+.nav-links > li {
+    margin-left: 30px;
+    list-style: none;
+}
+
+.container {
+    margin: auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.form > label {
+    margin-top: 5px;
+    width: 140px;
+}
+
+.form > input {
+    margin-top: 2px;
+    width: 140px;
+}
+
+.form > div {
+    margin-top: 10px;
+}
+
+.list-group-item {
+    list-style: none;
+} 
+
+.form > button {
+    width: 70px;
+    margin-top: 15px;
+}
+
